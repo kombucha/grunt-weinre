@@ -39,7 +39,10 @@ module.exports = function (grunt) {
       if (error) {
         grunt.fail.fatal(error);
       }
-      done();
     });
+
+    if (!options.blocking) {
+      done();
+    }
   });
 };
