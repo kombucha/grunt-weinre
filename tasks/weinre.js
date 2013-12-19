@@ -28,7 +28,7 @@ module.exports = function (grunt) {
       }
     });
 
-    grunt.util.spawn({
+    var weinreProcess = grunt.util.spawn({
       cmd: 'node',
       args: args,
       opts: {
@@ -39,6 +39,10 @@ module.exports = function (grunt) {
       if (error) {
         grunt.fail.fatal(error);
       }
+    });
+
+    process.on('exit', function() {
+      weinreProcess.kill();
     });
 
     if (!options.blocking) {
